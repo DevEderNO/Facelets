@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+
+    </h:head>
+    <h:body>
+
+        <h:form id="FrmMenu"  >
+            <p:menubar style="width: 100%" >
+                <p:submenu style="width:150px;"  label="Cadastros" icon="ui-icon ui-icon-document">
+                    <p:menuitem id="MnuCadAluno" action="#{alunoCTRL.exibirCadastro}" value="Alunos" ajax="false"/>
+                </p:submenu>
+                <p:submenu style="width:150px;" label="Consultas" icon="ui-icon ui-icon-document">
+                    <p:menuitem id="MnuConAluno" ajax="false" immediate="true" value="Alunos" action="#{alunoCTRL.consultarTodos()}"/>
+                </p:submenu>
+
+                <p:submenu style="width:150px;"  label="Temas">
+                    <p:menuitem  value="Aristo" ajax="false"><f:setPropertyActionListener value="aristo" target="#{sistema.tema}" /></p:menuitem>
+                    <p:menuitem value="BlueSky" ajax="false"><f:setPropertyActionListener value="bluesky" target="#{sistema.tema}" /></p:menuitem>
+                    <p:menuitem value="Cupertino" ajax="false"><f:setPropertyActionListener value="cupertino" target="#{sistema.tema}" /></p:menuitem>
+
+                </p:submenu>
+            </p:menubar>
+
+        </h:form>
+
+    </h:body>
+</html>
+

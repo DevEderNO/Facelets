@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/#{sistema.tema}/theme.css"/>
+        <style>
+            body {
+                
+                left:11%;
+                top: 0;
+                width:100;
+                padding:0;
+                height:100%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <p:panel id="PnlSistema">
+            <div id="cabecalho">
+                <ui:insert name="topo">
+                    <ui:include src="/topo.xhtml"/>
+                </ui:insert>
+            </div>
+            <div id="divMenu">
+                <ui:insert name="menu">
+                    <ui:include src="/menu.xhtml"/>
+                </ui:insert>
+            </div>
+            <div id="conteudo"> 
+
+                <ui:insert name="corpo" />  
+
+            </div>  
+        </p:panel>
+    </h:body>
+</html>

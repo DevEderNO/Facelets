@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding='ISO-8859-1' ?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>      
+
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/#{sistema.tema}/theme.css"/>
+
+        <title>Consulta Aluno</title>
+    </h:head>
+    <ui:composition template="/template.xhtml">
+        <ui:define name="corpo">    
+            <h:form id="FrmConAluno">
+
+                <p:panel id="panel" header="Consulta Alunos">
+                    <h:commandLink value="Início" action="/index"/>
+                    <p:dataTable paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="true" rows="10"  emptyMessage="Não existem alunos cadastrados." id="Tabela"  var="item" value="#{alunoCTRL.alunos}" style="width: 100%;border:solid 1px" >
+                        <p:column sortBy="#{item.nome}">
+                            <f:facet name="header">
+                                <h:outputText styleClass="texto" value="Nome" />
+                            </f:facet>
+                            <h:outputText styleClass="texto" value="#{item.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText styleClass="texto" value="Endereço" />
+                            </f:facet>
+                            <h:outputText styleClass="texto" value="#{item.endereco}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText styleClass="texto" value="Telefone" />
+                            </f:facet>
+                            <h:outputText styleClass="texto" value="#{item.telefone}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.escolaridade}">
+                            <f:facet name="header">
+                                <h:outputText styleClass="texto" value="Escolaridade"/>
+                            </f:facet>
+                            <h:outputText styleClass="texto" value="#{item.escolaridade}">
+                                <f:converter converterId="EscolaridadeConverter" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column  style="width: 140px">
+
+                            <f:facet name="header">
+                                <h:outputText styleClass="texto" value="Ações"/>
+                            </f:facet>
+                            <p:commandButton id="BtnExcluir" onclick="PF('dlg').show();" value="Excluir">
+                                <f:setPropertyActionListener value="#{item}" target="#{alunoCTRL.alunoTO}"/>
+                            </p:commandButton>
+                            <h:outputText value=" "/>
+                            <p:commandButton ajax="false" id="BtnAlterar" action="#{alunoCTRL.editarAluno}" value="Alterar">
+                                <f:setPropertyActionListener value="#{item}" target="#{alunoCTRL.alunoTO}"/>
+                            </p:commandButton>
+
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:dialog id="dialog" header="Exclusão" widgetVar="dlg" resizable="false">  
+                        <h:panelGrid columns="2" cellpadding="5">  
+                            <h:outputLabel value="Confirma a Exclusão deste Aluno?" />  
+                            <f:facet name="footer">  
+                                <p:commandButton type="button" onclick="PF('dlg').hide();" id="btnCancela" value="Cancelar" />
+                                <p:commandButton ajax="false" id="btnResp" value="OK" 
+                                                 action="#{alunoCTRL.excluir()}" />  
+                            </f:facet>  
+                        </h:panelGrid>  
+                    </p:dialog>  
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

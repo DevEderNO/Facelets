@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>       
+
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/#{sistema.tema}/theme.css"/>
+
+        <title>Cadastro de Aluno</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="corpo">
+                <h:form id="Formulario">
+                    
+                    <p:panel id="panel" header="Cadastro de Alunos">
+                        <p:messages id="Mens" />
+                        <p:focus for="TxtNome" />
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Nome:"/>
+
+                            <p:inputText id="TxtNome" 
+                                         value="#{alunoCTRL.alunoTO.nome}"
+                                         required="true"
+                                         requiredMessage="Nome não informado" 
+                                         size="60" 
+                                         maxlength="60">
+                                <f:validateLength minimum="5" maximum="60"/>
+
+                            </p:inputText>
+
+                            <h:outputLabel value="Endereço:"/>
+                            <p:inputText id="TxtEndereco" 
+                                         value="#{alunoCTRL.alunoTO.endereco}"
+                                         required="true" 
+                                         requiredMessage="Endereço não informado" 
+                                         size="60"
+                                         maxlength="100">
+                                <f:validateLength minimum="5" maximum="100"/>
+                            </p:inputText>
+                            <h:outputLabel value="Telefone:"/>
+                            <p:inputMask mask="(99) 9999-9999" id="TxtTelefone" 
+                                         value="#{alunoCTRL.alunoTO.telefone}"
+                                         required="true" 
+                                         requiredMessage="Telefone não informado" 
+                                         size="20" 
+                                         validatorMessage="Informe o telefone no formato (99) 9999-9999"
+                                         maxlength="20">
+                                <f:validateLength minimum="2" maximum="20"/>
+                                <f:validateRegex  pattern="([(][0-9]{2}[)][ ][0-9]{4}[-][0-9]{4})"/>
+                            </p:inputMask>
+                            <h:outputLabel value="Escolaridade:"/>
+                            <h:selectOneMenu id="CboEscolaridade" value="#{alunoCTRL.alunoTO.escolaridade}" required="true" requiredMessage="Escolaride não informada">
+                                <f:selectItems value="#{alunoCTRL.escolaridades}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <p:commandButton id="BtnIncluir" ajax="false" value="#{alunoCTRL.labelBtnIncAlt}" action="#{alunoCTRL.manterAluno}" />
+                        <h:outputText value=" "/>
+                        <p:commandButton id="BtnConsultar" ajax="false" immediate="true" value="Consultar" action="#{alunoCTRL.consultarTodos}" />
+                        <h:outputText value=" "/>
+                        <p:commandButton id="BtnRelatorio" ajax="false"  immediate="true" value="Relatório" action="#{alunoCTRL.emiteRelatorio}" />
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
